@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 
 function MainPage() {
   const [products, setProducts] = React.useState([]);
-  const url =
-    "https://929fc3c6-19e6-4972-b8b5-ca9885d8b064.mock.pstmn.io/products";
+  const url = "http://localhost:8080/products";
   React.useEffect(function () {
     axios
       .get(url)
@@ -34,9 +33,12 @@ function MainPage() {
               {products.map(function (product, index) {
                 return (
                   <div className="product-card">
-                    <Link className="product-link" to={`/products/${index}`}>
+                    <Link
+                      className="product-link"
+                      to={`/products/${product.id}`}
+                    >
                       <div>
-                        <img className="product-img" src={product.imageUrl} />
+                        <img className="product-img" src={product.img_url} />
                       </div>
                       <div className="product-contents">
                         <span className="product-name">{product.name}</span>

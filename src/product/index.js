@@ -9,12 +9,12 @@ function ProductPage() {
 
   console.log(product);
 
-  const url = `https://929fc3c6-19e6-4972-b8b5-ca9885d8b064.mock.pstmn.io/products/${id}`;
+  const url = `http://localhost:8080/products/${id}`;
   React.useEffect(function () {
     axios
       .get(url)
       .then(function (result) {
-        const product = result.data;
+        const product = result.data[0];
         setProduct(product);
       })
       .catch(function (error) {
@@ -29,7 +29,7 @@ function ProductPage() {
   return (
     <div>
       <div id="image-box">
-        <img src={"/" + product.imageUrl} />
+        <img src={"/" + product.img_url} />
       </div>
       <div id="profile-box">
         <img src="/images/icons/avatar.png" />
@@ -39,7 +39,7 @@ function ProductPage() {
         <div id="name">{product.name}</div>
         <div id="price">{product.price}원</div>
         <div id="createdAt">2020년 12월 8일</div>
-        <div id="description">{product.desc} </div>
+        <div id="description">{product.img_info} </div>
       </div>
     </div>
   );

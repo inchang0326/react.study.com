@@ -1,16 +1,26 @@
 import { Form, Divider, Input, InputNumber, Button } from "antd";
+import axios from "axios";
 import "./index.css";
 
 function UploadPage() {
   const onSubmit = (values) => {
     console.log(values);
+    const url = "http://localhost:8080/product";
+    axios
+      .post(url, values)
+      .then(function (result) {
+        console.log(result.data);
+      })
+      .catch(function (error) {
+        console.log(error.stack);
+      });
   };
   return (
     <div id="upload-container">
       <br></br>
       <Form name="상품 업로드" onFinish={onSubmit}>
         <Form.Item
-          name="upload"
+          name="img_url"
           label={<div className="upload-label">상품 사진</div>}
         >
           <div id="upload-img-placeholder">
@@ -56,7 +66,7 @@ function UploadPage() {
         </Form.Item>
         <Divider />
         <Form.Item
-          name="description"
+          name="img_info"
           label={<div className="upload-label">상품 소개</div>}
           rules={[{ required: true, message: "상품 정보를 입력해주세요." }]}
         >

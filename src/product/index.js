@@ -2,19 +2,21 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import React from "react";
 import "./index.css";
+import { API_URL } from "../config/constant.js";
+import dayjs from "dayjs";
+
+console.log(dayjs().format("YYYYMMDD"));
 
 function ProductPage() {
   const { id } = useParams();
   const [product, setProduct] = React.useState(null);
-
-  console.log(product);
-
-  const url = `http://localhost:8080/products/${id}`;
+  const url = `${API_URL}/products/${id}`;
   React.useEffect(function () {
     axios
       .get(url)
       .then(function (result) {
-        const product = result.data[0];
+        const product = result.data;
+        console.log(product);
         setProduct(product);
       })
       .catch(function (error) {
@@ -29,7 +31,7 @@ function ProductPage() {
   return (
     <div>
       <div id="image-box">
-        <img src={"/" + product.img_url} />
+        <img src={product.img_url} />
       </div>
       <div id="profile-box">
         <img src="/images/icons/avatar.png" />
@@ -38,8 +40,10 @@ function ProductPage() {
       <div id="contents-box">
         <div id="name">{product.name}</div>
         <div id="price">{product.price}원</div>
-        <div id="createdAt">2020년 12월 8일</div>
-        <div id="description">{product.img_info} </div>
+        <div id="createdAt">
+          {dayjs(product.created_at).format("YYYY-MM-DD HH시 mm분")}
+        </div>
+        <pre id="description">{product.img_info} </pre>
       </div>
     </div>
   );

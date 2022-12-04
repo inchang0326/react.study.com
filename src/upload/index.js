@@ -14,6 +14,7 @@ function UploadPage() {
       .post(url, values)
       .then(function (result) {
         console.log(result.data);
+        message.info("상품 업로드를 완료했습니다.");
         navi("/");
       })
       .catch(function (error) {

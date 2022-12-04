@@ -4,16 +4,17 @@ import React from "react";
 import "./index.css";
 import { API_URL } from "../config/constant.js";
 import dayjs from "dayjs";
+import { Button, message } from "antd";
 
 console.log(dayjs().format("YYYYMMDD"));
 
 function ProductPage() {
   const { id } = useParams();
   const [product, setProduct] = React.useState(null);
-  const url = `${API_URL}/products/${id}`;
-  React.useEffect(function () {
+
+  const getProduct = () => {
     axios
-      .get(url)
+      .get(`${API_URL}/products/${id}`)
       .then(function (result) {
         const product = result.data;
         console.log(product);
@@ -22,11 +23,30 @@ function ProductPage() {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  React.useEffect(function () {
+    getProduct();
   }, []);
 
   if (product === null) {
     return <h1>상품 정보를 받고 있습니다...</h1>;
   }
+
+  const onClickOrder = (order) => {
+    axios
+      .post(`${API_URL}/products/${id}/order`)
+      .then(function (result) {
+        const product = result.data;
+        console.log(product);
+        message.info("주문을 완료했습니다.");
+        getProduct();
+      })
+      .catch(function (error) {
+        console.log(error);
+        message.error("주문에 실패했습니다.");
+      });
+  };
 
   return (
     <div>
@@ -43,6 +63,16 @@ function ProductPage() {
         <div id="createdAt">
           {dayjs(product.created_at).format("YYYY-MM-DD HH시 mm분")}
         </div>
+        <Button
+          id="order-btn"
+          size="large"
+          type="primary"
+          danger
+          onClick={onClickOrder}
+          disabled={product.status === "02"}
+        >
+          주문하기
+        </Button>
         <pre id="description">{product.img_info} </pre>
       </div>
     </div>

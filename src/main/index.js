@@ -60,6 +60,9 @@ function MainPage() {
               {products.map(function (product, index) {
                 return (
                   <div className="product-card">
+                    {product.status === "02" && (
+                      <div className="product-blur">Sold Out</div>
+                    )}
                     <Link
                       className="product-link"
                       to={`/products/${product.id}`}

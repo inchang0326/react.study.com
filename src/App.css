@@ -43,3 +43,19 @@ body,
   height: 200px;
   background-color: rgb(230, 230, 230);
 }
+
+@media screen and (max-width: 400px) {
+  /* 400px 까지 해당 css를 적용할 것*/
+  .product-card {
+    width: 1600px !important;
+  }
+  #header {
+    padding: 0 8px;
+  }
+  #body {
+    padding: 0 8px;
+  }
+  .ant-carousel {
+    margin: 0 -16px;
+  }
+}

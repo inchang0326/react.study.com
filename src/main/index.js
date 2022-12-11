@@ -32,9 +32,7 @@ function MainPage() {
         console.log(banners);
         setBanners(banners);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
   }, []);
   return (
     <div>

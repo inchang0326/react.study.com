@@ -39,5 +39,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  },
+  "jest_comment": {
+    "_comment": "https://stackoverflow.com/questions/73958968/cannot-use-import-statement-outside-a-module-with-axios"
   }
 }

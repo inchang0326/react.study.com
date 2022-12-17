@@ -18,7 +18,6 @@ function UploadPage() {
         navi("/");
       })
       .catch(function (error) {
-        console.log(error.stack);
         message.error("상품 업로드에 실패했습니다.");
       });
   };
@@ -112,7 +111,12 @@ function UploadPage() {
           />
         </Form.Item>
         <Form.Item>
-          <Button id="submit-button" size="large" htmlType="submit">
+          <Button
+            data-testid="upload-btn"
+            id="submit-button"
+            size="large"
+            htmlType="submit"
+          >
             업로드
           </Button>
         </Form.Item>

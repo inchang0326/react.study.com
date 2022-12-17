@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
-test("renders learn react link", () => {
+test("first test", () => {
   render(
     /*
       useNavigate() may be used only in the context of a <Router> component
@@ -21,5 +21,4 @@ test("renders learn react link", () => {
                   findBy..() = getBy..() + waitFor(일정 시간 동안 기다림)
   */
   expect(linkElement).toBeInTheDocument();
-  console.log(`=> ${linkElement}`);
 });

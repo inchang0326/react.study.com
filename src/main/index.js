@@ -6,12 +6,14 @@ import { API_URL } from "../config/constant.js";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Carousel } from "antd";
+import ErrorBanner from "../components/ErrorBanner";
 
 dayjs.extend(relativeTime);
 
 function MainPage() {
   const [products, setProducts] = React.useState([]);
   const [banners, setBanners] = React.useState([]);
+  const [error, SetError] = React.useState(false);
 
   React.useEffect(function () {
     axios
@@ -22,7 +24,7 @@ function MainPage() {
         setProducts(products);
       })
       .catch(function (error) {
-        console.log(error);
+        SetError(true);
       });
 
     axios
@@ -32,8 +34,15 @@ function MainPage() {
         console.log(banners);
         setBanners(banners);
       })
-      .catch(function (error) {});
+      .catch(function (error) {
+        SetError(true);
+      });
   }, []);
+
+  if (error) {
+    return <ErrorBanner message={`Main Page API Fetch Error!`} />;
+  }
+
   return (
     <div>
       <html>
@@ -47,7 +56,7 @@ function MainPage() {
                 return (
                   <Link to="/events">
                     <div id="banner">
-                      <img src={banner.img_url} />
+                      <img alt="banner" src={banner.img_url} />
                     </div>
                   </Link>
                 );
@@ -66,7 +75,11 @@ function MainPage() {
                       to={`/products/${product.id}`}
                     >
                       <div>
-                        <img className="product-img" src={product.img_url} />
+                        <img
+                          alt="product"
+                          className="product-img"
+                          src={product.img_url}
+                        />
                       </div>
                       <div className="product-contents">
                         <span className="product-name">{product.name}</span>
@@ -74,6 +87,7 @@ function MainPage() {
                         <div className="product-footer">
                           <div className="product-seller">
                             <img
+                              alt="avatar"
                               className="product-avatar"
                               src="images/icons/avatar.png"
                             />

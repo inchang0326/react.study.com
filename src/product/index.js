@@ -5,12 +5,14 @@ import "./index.css";
 import { API_URL } from "../config/constant.js";
 import dayjs from "dayjs";
 import { Button, message } from "antd";
+import ErrorBanner from "../components/ErrorBanner";
 
 console.log(dayjs().format("YYYYMMDD"));
 
 function ProductPage() {
   const { id } = useParams();
   const [product, setProduct] = React.useState(null);
+  const [error, SetError] = React.useState(false);
 
   const getProduct = () => {
     axios
@@ -21,7 +23,7 @@ function ProductPage() {
         setProduct(product);
       })
       .catch(function (error) {
-        console.log(error);
+        SetError(true);
       });
   };
 
@@ -43,10 +45,13 @@ function ProductPage() {
         getProduct();
       })
       .catch(function (error) {
-        console.log(error);
-        message.error("주문에 실패했습니다.");
+        SetError(true);
       });
   };
+
+  if (error) {
+    return <ErrorBanner message="Proudct Page Ordering Failed!" />;
+  }
 
   return (
     <div>

@@ -18,7 +18,7 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 // API Fetch Succeeded
-test("show all product list", async () => {
+test("Show all product list", async () => {
   render(
     <BrowserRouter>
       <MainPage />
@@ -30,7 +30,7 @@ test("show all product list", async () => {
 });
 
 // API Fetch Failed
-test("Main Page API fetch fails", async () => {
+test("Main Page API fetch failed", async () => {
   render(
     <BrowserRouter>
       <MainPage />

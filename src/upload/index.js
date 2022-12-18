@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function UploadPage() {
   const navi = useNavigate();
   const onSubmit = (values) => {
-    values.img_url = values.img_url.file.response.img_url;
+    values.img_url = values.img_url && values.img_url.file.response.img_url;
     const url = `${API_URL}/product`;
     axios
       .post(url, values)
@@ -41,7 +41,7 @@ function UploadPage() {
         <Form.Item
           name="img_url"
           label={<div className="upload-label">상품 사진</div>}
-          rules={[{ required: true, message: "상품 사진을 업로드 해주세요" }]}
+          rules={[{ required: false, message: "상품 사진을 업로드 해주세요" }]}
         >
           <Upload
             name="image"
@@ -54,7 +54,7 @@ function UploadPage() {
               <img id="upload-image" src={`${API_URL}/${imageUrl}`} />
             ) : (
               <div id="upload-img-placeholder">
-                <img src="/images/icons/camera.png" />
+                <img src="images/icons/camera.png" />
                 <span>이미지를 업로드해주세요.</span>
               </div>
             )}
@@ -67,6 +67,7 @@ function UploadPage() {
           rules={[{ required: true, message: "판매자 이름을 입력해주세요" }]}
         >
           <Input
+            data-testid="product-seller"
             className="upload-category"
             size="large"
             placeholder="이름을 입력해주세요."
@@ -79,6 +80,7 @@ function UploadPage() {
           rules={[{ required: true, message: "상품 이름을 입력해주세요" }]}
         >
           <Input
+            data-testid="product-name"
             className="upload-category"
             size="large"
             placeholder="상품 이름을 입력해주세요"
@@ -91,6 +93,7 @@ function UploadPage() {
           rules={[{ required: true, message: "상품 가격을 입력해주세요" }]}
         >
           <Input
+            data-testid="product-price"
             className="upload-category"
             size="large"
             placeholder="상품 가격을 입력해주세요"
@@ -103,6 +106,7 @@ function UploadPage() {
           rules={[{ required: true, message: "상품 정보를 입력해주세요." }]}
         >
           <Input.TextArea
+            data-testid="product-intro"
             size="large"
             id="product-info"
             showCount

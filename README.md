@@ -1,7 +1,7 @@
 # Grab Market Web Project
 
 I created this project to study React.js and Node.js  
-This project was bootstrapped with one of Inflearn lectures
+This project was referred to one of Inflearn lectures
 
 ## ERD
 

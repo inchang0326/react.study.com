@@ -7,6 +7,11 @@ This project was bootstrapped with one of Inflearn lectures
 
 ![image](https://user-images.githubusercontent.com/12199090/208284416-ce805a74-f206-4cfc-a1b2-c8919e984335.png)
 
+## TDD
+
+- React Testing Library
+- Jest
+
 ## Web Structure
 
 Home  

@@ -50,7 +50,10 @@ function ProductPage() {
   };
 
   if (error) {
-    return <ErrorBanner message="Proudct Page Ordering Failed!" />;
+    const props = {
+      message: "Proudct Page Ordering Failed!",
+    };
+    return <ErrorBanner {...props} />; // props 객체 spread
   }
 
   return (

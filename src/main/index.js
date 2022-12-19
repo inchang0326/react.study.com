@@ -40,7 +40,10 @@ function MainPage() {
   }, []);
 
   if (error) {
-    return <ErrorBanner message={`Main Page API Fetch Error!`} />;
+    const props = {
+      message: "Main Page API Fetch Error!",
+    };
+    return <ErrorBanner {...props} />; // props 객체 spread
   }
 
   return (
